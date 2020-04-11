@@ -10,7 +10,7 @@ import java.io.IOException;
 public class CompressBitmapIndex {
 
 	String sourcePath;
-	int startIndex = 0, endIndex = 0;
+	public static int startIndex = 0, endIndex = 0;
 	public CompressBitmapIndex() {
 		
 	}
@@ -22,24 +22,28 @@ public class CompressBitmapIndex {
 		for(File file : folder.listFiles()) {
 			if(file.isFile()) {
 				String fileName = file.getName();
-//				System.out.println(fileName);
+				System.out.println(fileName.substring(13, 17));
 				
-				if(fileName.substring(11, 15).equals("empi")) {
+				if(file.getName().substring(13, 17).equalsIgnoreCase("empi")) {
+					System.out.println("EmpID indexes");
 					startIndex = 0;
 					endIndex = 8;
-				} else if(fileName.substring(11, 15).equals("gend")) {
+				} else if(file.getName().substring(13, 17).equalsIgnoreCase("gend")) {
+					System.out.println("Gender indexes");
 					startIndex = 0;
 					endIndex = 1;
-				} else if(fileName.substring(11, 15).equals("dept")) {
+				} else if(file.getName().substring(13, 17).equalsIgnoreCase("dept")) {
+					System.out.println("Dept indexes");
 					startIndex = 0;
 					endIndex = 3;
 				}
-				String outputFile = sourcePath + "\\C" + fileName.substring(3);
+				String outputFile = sourcePath + "\\c" + fileName.substring(3);
 				BufferedReader reader;
 				BufferedWriter writer;
 				try {
 					reader = new BufferedReader(new FileReader(file));
 					FileWriter FileWriter = new FileWriter(outputFile, true);
+					System.out.println("Reading " + file.getName() + " with index " + startIndex + ", " + endIndex);
 		            writer = new BufferedWriter(FileWriter);
 					String line = reader.readLine();
 					
