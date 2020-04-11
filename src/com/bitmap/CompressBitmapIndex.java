@@ -20,7 +20,7 @@ public class CompressBitmapIndex {
 		
 		File folder = new File(sourcePath);
 		for(File file : folder.listFiles()) {
-			if(file.isFile()) {
+			if(file.isFile() && file.getName().startsWith("uncompressed")) {
 				String fileName = file.getName();
 				System.out.println(fileName.substring(13, 17));
 				
