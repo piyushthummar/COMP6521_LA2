@@ -92,7 +92,7 @@ public class CreateBitmapIndex {
 				}
 				
 				sumOfRecords += dataList.size();
-				System.out.println(dataList.size() + " scanned records = " + sumOfRecords);
+//				System.out.println(dataList.size() + " scanned records = " + sumOfRecords);
 				padding.add(zeros);
 				zeros = "";
 				createPartialBitmap(dataList, startIndex, endIndex, indexOn);
@@ -103,7 +103,7 @@ public class CreateBitmapIndex {
 			long endSublist = System.currentTimeMillis();
 			System.out.println("partial index on " + indexOn + " is generated in " + (endSublist - startSublist)/1000 + " seconds");
 			// System.out.println(records + " records");
-			System.out.println(sumOfRecords);
+//			System.out.println(sumOfRecords);
 			System.out.println("Merging partial indexes...");
 
 			mergePartialBitmap(destinationFolder + "\\" + indexOn, "./IO_Files", indexOn);
@@ -156,7 +156,7 @@ public class CreateBitmapIndex {
 				pw.println(s);
 				pw.flush();
 			}
-			System.out.println("unique : " + setOfIndexOn.size());
+//			System.out.println("unique : " + setOfIndexOn.size());
 			dataList.clear();
 			// System.out.println("file " + current_subFile + " is generated");
 			pw.close();
