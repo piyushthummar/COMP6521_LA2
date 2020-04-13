@@ -106,7 +106,7 @@ public class CreateBitmapIndex {
 //			System.out.println(sumOfRecords);
 			System.out.println("Merging partial indexes...");
 
-			mergePartialBitmap(destinationFolder + "\\" + indexOn, "./IO_Files", indexOn);
+			mergePartialBitmap(destinationFolder + "/" + indexOn, "./IO_Files", indexOn);
 
 			System.out.println("Bitmap index on " + indexOn + " is generated");
 			fr.close();
@@ -127,7 +127,7 @@ public class CreateBitmapIndex {
 		boolean writeSuccess = true;
 		total_current_subFile++;
 		subFileCount++;
-		String subfilePath = destinationFolder + "\\" + type + "\\partial-bitmap-" + Integer.toString(subFileCount)
+		String subfilePath = destinationFolder + "/" + type + "/partial-bitmap-" + Integer.toString(subFileCount)
 				+ ".txt";
 		subFilesPath.add(subfilePath);
 		
@@ -170,8 +170,8 @@ public class CreateBitmapIndex {
 	}
 
 	public void mergePartialBitmap(String sourcePathFolder, String destFolderForMergedIndex, String indexOn) {
-		String destinationPath = destFolderForMergedIndex + "\\uncompressed-" + indexOn + "-index-" + sumOfRecords + ".txt";
-		String mergedIndex = sourcePathFolder + "\\merged-index.txt";
+		String destinationPath = destFolderForMergedIndex + "/uncompressed-" + indexOn + "-index-" + sumOfRecords + ".txt";
+		String mergedIndex = sourcePathFolder + "/merged-index.txt";
 		PrintWriter pw;
 		FileReader fr;
 		Scanner sc;
@@ -201,7 +201,7 @@ public class CreateBitmapIndex {
 			for (int index = 0; index < subFileCount; index++) {
 				setOfUnique = new HashSet<>();
 				zeros = "";
-				File file = new File(sourcePathFolder + "\\partial-bitmap-" + (int)(index + 1) + ".txt");
+				File file = new File(sourcePathFolder + "/partial-bitmap-" + (int)(index + 1) + ".txt");
 				fr = new FileReader(file);
 				sc = new Scanner(fr);
 //				System.out.println(sourcePathFolder + "/" +file.getName());
@@ -221,7 +221,7 @@ public class CreateBitmapIndex {
 			// Creating pointer to each subfiles
 			for (int index = 0; index < subFileCount; index++) {
 				zeros = "";
-				File file = new File(sourcePathFolder + "\\partial-bitmap-" + (int)(index + 1) + ".txt");
+				File file = new File(sourcePathFolder + "/partial-bitmap-" + (int)(index + 1) + ".txt");
 				fr = new FileReader(file);
 				sc = new Scanner(fr);
 //				System.out.println(sourcePathFolder + "/" +file.getName());
@@ -235,7 +235,7 @@ public class CreateBitmapIndex {
 						if(!data.contains(s.substring(startIndex, endIndex))) {
 							print += padding.get(paddingIndex);
 						} else {
-							File file2 = new File(sourcePathFolder + "\\partial-bitmap-" + (int)(paddingIndex + 1) + ".txt");
+							File file2 = new File(sourcePathFolder + "/partial-bitmap-" + (int)(paddingIndex + 1) + ".txt");
 							FileReader fr2 = new FileReader(file2);
 							Scanner sc2 = new Scanner(fr2);
 							while(sc2.hasNextLine()) {
@@ -254,7 +254,7 @@ public class CreateBitmapIndex {
 			}
 
 			System.gc();
-			//Removing suplicate entry
+			//Removing duplicate entry of bitmap Index
 			setOfUnique = new HashSet<>();
 			pw = new PrintWriter(new File(destinationPath));
 			sc = new Scanner(new File(mergedIndex));
