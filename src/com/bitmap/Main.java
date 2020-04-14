@@ -23,8 +23,11 @@ public class Main {
 	public static void main(String[] args) {
 		long startExecutionTime = System.currentTimeMillis();
 		
-		String fileOne = "./10000.txt";
+		String fileOne = "./100000.txt";
+		String fileTwo = "./10000.txt";
+		
 		String destinationFolderOne = "./IO_Files/PartialBitmapResult/fileOne";
+		System.out.println("***** Starting process for file " + fileOne.substring(2) + " *****");
 		CreateBitmapIndex create = new CreateBitmapIndex(fileOne, destinationFolderOne);
 		long startTime = 0, endTime = 0;
 		startTime = System.currentTimeMillis();
@@ -45,9 +48,10 @@ public class Main {
 		long timeForDeptBitmap = endTime - startTime;
 		System.out.println(timeForDeptBitmap + " ms");
 		long fileOneTime = (timeForEmpIdBitmap + timeForGenderBitmap + timeForDeptBitmap)/1000;
-		System.out.println("\nTotal time for File One: " + fileOneTime + " seconds\n");
+		System.out.println("\nTotal time for File " + fileOne.substring(2) + " is " + fileOneTime + " seconds\n");
 		
-		String fileTwo = "./15000.txt";
+//		String fileTwo = "./50000.txt";
+		System.out.println("\n***** Starting process for file " + fileTwo.substring(2) + " *****");
 		String destinationFolderTwo = "./IO_Files/PartialBitmapResult/fileTwo";
 		create = new CreateBitmapIndex(fileTwo, destinationFolderTwo);
 		
@@ -70,11 +74,11 @@ public class Main {
 		System.out.println(timeForDeptBitmap + " ms");
 		
 		long fileTwoTime = (timeForEmpIdBitmap + timeForGenderBitmap + timeForDeptBitmap)/1000;
-		System.out.println("\nTotal time for File Two: " + fileTwoTime + " seconds");
+		System.out.println("\nTotal time for File " + fileTwo.substring(2) + " is " + fileTwoTime + " seconds");
 		System.out.println("\n\nTotal time for both files is " + (fileOneTime + fileTwoTime) + " seconds");
 		System.out.println("BMI generated");
 		
-		System.out.println("Starting compression...");
+		System.out.println("\nStarting compression...");
 		System.gc();
 		long compressionStartTime = System.currentTimeMillis();
 		CompressBitmapIndex compress = new CompressBitmapIndex();
@@ -86,7 +90,7 @@ public class Main {
 		
 		
 //		//Starting the process of duplication removal and merging...
-		System.out.println("Starting Removal of duplication...");
+		System.out.println("\nStarting Removal of duplication...");
 		RemoveDuplicationAndMerge removeAndMerge = new RemoveDuplicationAndMerge();
 		long startTotalTime = System.currentTimeMillis();
 		
@@ -123,7 +127,7 @@ public class Main {
 		
 		long endExecutionTime = System.currentTimeMillis();
 		int totalExecutionTime = (int)(endExecutionTime - startExecutionTime)/ 1000;
-		System.out.println("Total execution time is " + totalExecutionTime + " seconds or " + (int)(totalExecutionTime/60) + " minutes"); 
+		System.out.println("Total execution time is " + totalExecutionTime + " seconds or ~approx " + (int)(totalExecutionTime/60) + " minutes"); 
 		System.out.println("Done!!!");
 	}
 

@@ -101,14 +101,14 @@ public class CreateBitmapIndex {
 				Main.totalSubFiles = total_current_subFile;
 			}
 			long endSublist = System.currentTimeMillis();
-			System.out.println("partial index on " + indexOn + " is generated in " + (endSublist - startSublist)/1000 + " seconds");
+			System.out.println("partial index on " + indexOn + " is generated in " + (endSublist - startSublist) + " ms or " + (endSublist - startSublist)/1000 + " seconds");
 			// System.out.println(records + " records");
 //			System.out.println(sumOfRecords);
 			System.out.println("Merging partial indexes...");
 
 			mergePartialBitmap(destinationFolder + "/" + indexOn, "./IO_Files", indexOn);
 
-			System.out.println("Bitmap index on " + indexOn + " is generated");
+			System.out.println("Bitmap index on " + indexOn + " is generated for " + filePath.substring(2) + " file.");
 			fr.close();
 			br.close();
 			sc.close();
@@ -208,6 +208,7 @@ public class CreateBitmapIndex {
 //				System.out.println("merging " + (index+1) + " file...");
 				
 				while (sc.hasNextLine()) {
+					System.gc();
 					String s = sc.nextLine();
 					
 					if (!setOfUnique.contains(s.subSequence(startIndex, endIndex))) {
